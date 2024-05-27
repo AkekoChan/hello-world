@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   return (
-    <header className="navbar p-8 border-b-2 border-waikawa-gray-200/50">
+    <header className="navbar px-8 py-8 border-b-2 border-waikawa-gray-200/50 lg:px-20">
       <div className="flex-1">
         <Link
           href="/"
@@ -75,7 +75,7 @@ const Header = () => {
       </label>
       <nav
         id="menu"
-        className={`absolute top-28 bg-waikawa-gray-50 left-0 lg:static lg:block ${
+        className={`absolute top-28 z-20 bg-waikawa-gray-50 left-0 lg:static lg:block ${
           isExpanded ? "block" : "hidden"
         }`}
         role="navigation"

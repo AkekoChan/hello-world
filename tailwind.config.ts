@@ -25,12 +25,31 @@ const config: Config = {
     extend: {
       fontFamily: {
         ubuntu: ["var(--font-ubuntu)"],
+        roboto: ["var(--font-roboto)"],
+        arial: ["Arial", "sans-serif"],
+      },
+      flex: {
+        "400": "0 0 400px",
+      },
+      borderWidth: {
+        1: "1px",
+      },
+      gap: {
+        1.25: "0.3125rem",
       },
     },
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: false,
+    themes: [
+      {
+        mytheme: {
+          primary: "#4a5989",
+          secondary: "#839dd1",
+          "base-100": "#f2f7fb",
+        },
+      },
+    ],
   },
 };
 export default config;

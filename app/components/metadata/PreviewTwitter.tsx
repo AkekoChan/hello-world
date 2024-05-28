@@ -16,7 +16,7 @@ const PreviewTwitter = () => {
           className={`flex flex-col gap-1.5 bg-[#ffffff] text-[#000000] border-[#dadde1] border-1 py-3 px-4  ${roboto.className} rounded-b-xl`}
         >
           <p className="font-bold">
-            Hello World - The developer's Swiss Army knife
+            Hello World - The developer&apos;s Swiss Army knife
           </p>
           <p className="text-[##606770] text-sm text-ellipsis">
             Hello World is a site that gathers a set of tools to make developers

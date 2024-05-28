@@ -15,7 +15,7 @@ const PreviewFacebook = () => {
             hello-world-dev.vercel.app
           </span>
           <p className="font-bold">
-            Hello World - The developer's Swiss Army knife
+            Hello World - The developer&apos;s Swiss Army knife
           </p>
           <p className="text-[##606770] text-sm text-ellipsis">
             Hello World is a site that gathers a set of tools to make developers

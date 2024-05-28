@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const Header = () => {
   const pathname = usePathname();
@@ -17,6 +17,12 @@ const Header = () => {
     setIsExpanded(false);
   };
 
+  useEffect(() => {
+    isExpanded
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "auto");
+  }, [isExpanded]);
+
   return (
     <header className="navbar px-8 py-8 border-b-2 border-waikawa-gray-200/50 lg:px-20">
       <div className="flex-1">
@@ -28,7 +34,7 @@ const Header = () => {
           onClick={handleRemoveMenu}
         >
           <Image
-            src="/hello-world-logo.svg"
+            src="/icon.png"
             width={32}
             height={32}
             alt="The logo of Hello World, it's double slash."

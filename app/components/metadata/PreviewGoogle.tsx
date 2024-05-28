@@ -9,7 +9,7 @@ const PreviewGoogle = () => {
             https://hello-world-dev.vercel.app/
           </p>
           <p className="text-[#1a0dab] font-arial text-xl lg:text-2xl group-hover:underline py-1 text-ellipsis">
-            Hello World - The developer's Swiss Army knife
+            Hello World - The developer&apos;s Swiss Army knife
           </p>
         </div>
         <p className="text-[#4d5156] text-sm">

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import FormPicture from "./../components/picture/FormPicture";
 
 export const metadata: Metadata = {
   title: "Hello World - Picture Generator",
@@ -7,7 +8,16 @@ export const metadata: Metadata = {
 const PicturePage = () => {
   return (
     <>
-      <h1 className="text-4xl font-bold text-waikawa-gray-950">Picture</h1>
+      <section className="flex flex-col gap-4">
+        <h1 className="text-5xl font-bold">Picture Generator</h1>
+        <p>
+          Generate your images efficiently with this tool that creates a picture
+          tag and the associated images.
+        </p>
+      </section>
+      <section>
+        <FormPicture />
+      </section>
     </>
   );
 };

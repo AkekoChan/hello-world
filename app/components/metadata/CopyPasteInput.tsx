@@ -3,7 +3,7 @@
 import { useMetadataContext } from "@/app/context/metadata/metadataContext";
 import { baseUrl } from "@/app/robots";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, Suspense, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 export interface IMetadata {
   title: string;
@@ -63,26 +63,22 @@ const CopyPasteInput = () => {
   }, [useUrl]);
 
   return (
-    <Suspense>
-      <form className="flex items-end gap-4 flex-wrap" onSubmit={handleSubmit}>
-        <label className="form-control" htmlFor="cp-input">
-          <div className="label">
-            <span className="label-text">Enter the URL site :</span>
-          </div>
-          <input
-            className="input input-bordered input-primary shadow-lg"
-            onChange={handleChange}
-            type="text"
-            name="url"
-            id="cp-input"
-            value={urlSite as string}
-          />
-        </label>
-        <button className="btn btn-primary shadow-lg">
-          Let&apos;s Generate
-        </button>
-      </form>
-    </Suspense>
+    <form className="flex items-end gap-4 flex-wrap" onSubmit={handleSubmit}>
+      <label className="form-control" htmlFor="cp-input">
+        <div className="label">
+          <span className="label-text">Enter the URL site :</span>
+        </div>
+        <input
+          className="input input-bordered input-primary shadow-lg"
+          onChange={handleChange}
+          type="text"
+          name="url"
+          id="cp-input"
+          value={urlSite as string}
+        />
+      </label>
+      <button className="btn btn-primary shadow-lg">Let&apos;s Generate</button>
+    </form>
   );
 };
 

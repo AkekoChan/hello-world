@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import CopyPasteInput from "./components/metadata/CopyPasteInput";
 import MetadataForm from "./components/metadata/MetadataForm";
 import Modal from "./components/metadata/Modal";
@@ -16,7 +17,9 @@ const HomePage = async () => {
             Hello World is a site that gathers a set of tools to make developers
             tasks easier!
           </p>
-          <CopyPasteInput />
+          <Suspense>
+            <CopyPasteInput />
+          </Suspense>
         </section>
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="w-full">

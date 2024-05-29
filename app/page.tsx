@@ -11,7 +11,7 @@ const HomePage = async () => {
     <>
       <MetadataContextProvider>
         <section className="flex flex-col gap-4">
-          <h1 className="text-5xl grid-rows-2 font-bold">Hello World !</h1>
+          <h1 className="text-5xl font-bold">Hello World !</h1>
           <p>
             Hello World is a site that gathers a set of tools to make developers
             tasks easier!
@@ -19,8 +19,8 @@ const HomePage = async () => {
           <CopyPasteInput />
         </section>
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="flex flex-col gap-4 min-w-96">
-            <div className="sticky top-[1rem]">
+          <div className="w-full">
+            <div className="flex flex-col gap-4 sticky top-[1rem]">
               <h2 className="text-2xl font-bold">Metadata</h2>
               <MetadataForm />
             </div>

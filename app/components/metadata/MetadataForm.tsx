@@ -39,6 +39,11 @@ const MetadataForm = () => {
     });
   };
 
+  const handleOpenModal = () => {
+    let dialog: any = document?.getElementById("my_modal_2");
+    dialog.showModal();
+  };
+
   useEffect(() => {
     setImageToDisplay(previewImage ? previewImage : metadata?.image);
   }, [previewImage, metadata]);
@@ -94,7 +99,7 @@ const MetadataForm = () => {
       <button
         className="btn btn-primary w-full shadow-lg"
         type="submit"
-        onClick={() => document?.getElementById("my_modal_2")?.showModal()}
+        onClick={handleOpenModal}
       >
         <LuDownload size={"1.5rem"} /> Get your metadatas
       </button>

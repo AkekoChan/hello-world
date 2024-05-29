@@ -23,7 +23,7 @@ const CopyPasteInput = () => {
   const getMetadata = async (url: string) => {
     const formData = new FormData();
     formData.append("url", url);
-    const response = await fetch(`/api/metadata`, {
+    const response = await fetch(`/api/generate-metadata`, {
       // next: { revalidate: 604800 },
       method: "POST",
       body: formData,
@@ -46,7 +46,7 @@ const CopyPasteInput = () => {
 
     try {
       const formData = new FormData(event.currentTarget);
-      const response = await fetch("/api/metadata", {
+      const response = await fetch("/api/generate-metadata", {
         method: "POST",
         body: formData,
       });

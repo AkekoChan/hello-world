@@ -2,7 +2,8 @@
 
 import { useMetadataContext } from "@/app/context/metadata/metadataContext";
 import { baseUrl } from "@/app/robots";
-import { FormEvent, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
 
 export interface IMetadata {
   title: string;
@@ -14,8 +15,23 @@ export interface IMetadata {
 }
 
 const CopyPasteInput = () => {
-  const { setMetadata } = useMetadataContext();
-  const [urlSite, setUrlSite] = useState(baseUrl);
+  const searchParams = useSearchParams();
+  const { handleAddMetadata } = useMetadataContext();
+  const [urlSite, setUrlSite] = useState(searchParams.get("url") || baseUrl);
+  const useUrl = searchParams.get("url") || baseUrl;
+
+  const getMetadata = async (url: string) => {
+    const formData = new FormData();
+    formData.append("url", url);
+    const response = await fetch(`/api/metadata`, {
+      // next: { revalidate: 604800 },
+      method: "POST",
+      body: formData,
+    });
+
+    const data: IMetadata = await response.json();
+    handleAddMetadata(data);
+  };
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     setUrlSite(event.currentTarget.value);
@@ -23,6 +39,10 @@ const CopyPasteInput = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const url = new URL(baseUrl);
+    url.searchParams.set("url", urlSite as string);
+    history.pushState(null, "", url);
 
     try {
       const formData = new FormData(event.currentTarget);
@@ -32,12 +52,15 @@ const CopyPasteInput = () => {
       });
 
       const data: IMetadata = await response.json();
-
-      setMetadata(data);
+      handleAddMetadata(data);
     } catch (error: any) {
       console.error(error.message);
     }
   };
+
+  useEffect(() => {
+    getMetadata(useUrl);
+  }, [useUrl]);
 
   return (
     <form className="flex items-end gap-4 flex-wrap" onSubmit={handleSubmit}>
@@ -46,15 +69,15 @@ const CopyPasteInput = () => {
           <span className="label-text">Enter the URL site :</span>
         </div>
         <input
-          className="input input-bordered input-primary"
+          className="input input-bordered input-primary shadow-lg"
           onChange={handleChange}
           type="text"
           name="url"
           id="cp-input"
-          value={urlSite}
+          value={urlSite as string}
         />
       </label>
-      <button className="btn btn-primary">Let&apos;s Generate</button>
+      <button className="btn btn-primary shadow-lg">Let&apos;s Generate</button>
     </form>
   );
 };

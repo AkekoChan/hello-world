@@ -17,7 +17,6 @@ export const POST = async (req: Request) => {
     const parsedUrl = `https://${baseUrl}`;
     baseUrl = parsedUrl;
   }
-
   const res = await fetch(baseUrl);
   const html = await res.text();
 
@@ -34,9 +33,14 @@ export const POST = async (req: Request) => {
   const image =
     $('meta[property="og:image"]').attr("content") ||
     $('meta[property="og:image:url"]').attr("content");
-  const icon =
+  let icon =
     $('link[rel="icon"]').attr("href") ||
     $('link[rel="shortcut icon"]').attr("href");
+
+  if (!icon?.match(protocol)) {
+    const siteParsedURL = new URL(url as string);
+    icon = `https://${siteParsedURL.hostname}${icon}`;
+  }
 
   return Response.json({
     title: title,

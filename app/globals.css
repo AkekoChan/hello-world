@@ -3,12 +3,18 @@
 @tailwind utilities;
 
 :root {
+  --toastify-color-info: #4a5989 !important;
 }
 
 @media (prefers-color-scheme: dark) {
 }
 
 body {
+}
+
+::selection {
+  background: #4a5989;
+  color: #f2f7fb;
 }
 
 @layer utilities {

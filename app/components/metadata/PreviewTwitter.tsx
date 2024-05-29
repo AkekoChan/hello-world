@@ -1,29 +1,29 @@
-import { roboto } from "@/app/layout";
+"use client";
+
+import { useMetadataContext } from "@/app/context/metadata/metadataContext";
+import { roboto } from "@/app/utils/fonts/fonts";
 
 const PreviewTwitter = () => {
+  const { metadata } = useMetadataContext();
   return (
     <div className="flex flex-col gap-4 cursor-pointer">
       <span className="label-text pb-0 text-waikawa-gray-800">Facebook</span>
-      <div className="rounded-xl">
+      <div className="rounded-xl border-[#dadde1] border-1 shadow-lg">
         <div
           className="flex h-64 bg-cover bg-center rounded-t-xl"
           style={{
-            backgroundImage:
-              "url('https://martintheo.fr/assets/images/8F-bn8Sd0--400.png')",
+            backgroundImage: `url('${metadata?.image}')`,
           }}
         ></div>
         <div
-          className={`flex flex-col gap-1.5 bg-[#ffffff] text-[#000000] border-[#dadde1] border-1 py-3 px-4  ${roboto.className} rounded-b-xl`}
+          className={`flex flex-col gap-1.5 bg-[#ffffff] text-[#000000] py-3 px-4  ${roboto.className} rounded-b-xl`}
         >
-          <p className="font-bold">
-            Hello World - The developer&apos;s Swiss Army knife
-          </p>
+          <p className="font-bold">{metadata?.title}</p>
           <p className="text-[##606770] text-sm text-ellipsis">
-            Hello World is a site that gathers a set of tools to make developers
-            tasks easier!
+            {metadata?.description}
           </p>
           <span className="text-[#8B99A5] text-xs font-bold">
-            hello-world-dev.vercel.app
+            {metadata?.url.split("/")[2]}
           </span>
         </div>
       </div>

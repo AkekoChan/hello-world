@@ -5,10 +5,16 @@ import React, { createContext, useContext, useState } from "react";
 
 interface MetadataContextType {
   metadata: IMetadata | undefined;
-  setMetadata: React.Dispatch<React.SetStateAction<IMetadata | undefined>>;
+  handleAddMetadata: (data: IMetadata) => void;
 }
 
-const MetadataContext = createContext<MetadataContextType | null>(null);
+const metadataContextValue: MetadataContextType = {
+  metadata: undefined,
+  handleAddMetadata: () => {},
+};
+
+const MetadataContext =
+  createContext<MetadataContextType>(metadataContextValue);
 
 export const MetadataContextProvider = ({
   children,
@@ -17,13 +23,17 @@ export const MetadataContextProvider = ({
 }) => {
   const [metadata, setMetadata] = useState<IMetadata>();
 
-  const metadataContextValue: MetadataContextType = {
+  const handleAddMetadata = (data: IMetadata) => {
+    setMetadata(data);
+  };
+
+  const value = {
     metadata,
-    setMetadata,
+    handleAddMetadata,
   };
 
   return (
-    <MetadataContext.Provider value={metadataContextValue}>
+    <MetadataContext.Provider value={value}>
       {children}
     </MetadataContext.Provider>
   );

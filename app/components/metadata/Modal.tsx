@@ -16,19 +16,12 @@ const Modal = () => {
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;title&rsaquo;</span>
-      ${metadata?.title}
-      <span className="font-bold">&lsaquo;/title&rsaquo;</span>
+      <span className="font-bold">&lsaquo;title&rsaquo;</span>${metadata?.title}<span className="font-bold">&lsaquo;/title&rsaquo;</span>
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>
-      =&quot;description&quot;
-      <span className="font-bold">content</span>=&quot;
-      ${metadata?.description}&quot;
-      <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;description&quot; <span className="font-bold">content</span>=&quot;${metadata?.description}&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <br />
@@ -39,59 +32,32 @@ const Modal = () => {
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>=&quot;og:type&quot;
-      <span className="font-bold">
-        content
-      </span>=&quot;website&quot;
-      <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;og:type&quot; <span className="font-bold">content</span>=&quot;website&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>=&quot;og:url&quot;
-      <span className="font-bold">content</span>=&quot;
-      ${metadata?.url}
-      &quot; <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;og:url&quot; <span className="font-bold">content</span>=&quot;${metadata?.url}&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>=&quot;og:title&quot;
-      <span className="font-bold">content</span>=&quot;
-      ${metadata?.title}
-      &quot; <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;og:title&quot; <span className="font-bold">content</span>=&quot;${metadata?.title}&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>
-      =&quot;og:site_name&quot;
-      <span className="font-bold">content</span>=&quot;
-      ${metadata?.title}
-      &quot; <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;og:site_name&quot; <span className="font-bold">content</span>=&quot;${metadata?.title}&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>
-      =&quot;og:description&quot;
-      <span className="font-bold">content</span>=&quot;
-      ${metadata?.description}
-      &quot; <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;og:description&quot; <span className="font-bold">content</span>=&quot;${metadata?.description}&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>=&quot;og:image&quot;
-      <span className="font-bold">content</span>
-      =&quot;your-link-image&quot;
-      <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;og:image&quot; <span className="font-bold">content</span>=&quot;your-link-image&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <br />
@@ -102,52 +68,27 @@ const Modal = () => {
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>
-      =&quot;twitter:card&quot;
-      <span className="font-bold">content</span>
-      =&quot;summary_large_image&quot;
-      <span className="font-bold">/&rsaquo;</span>;
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;twitter:card&quot; <span className="font-bold">content</span>=&quot;summary_large_image&quot; <span className="font-bold">/&rsaquo;</span>;
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>
-      =&quot;twitter:url&quot;
-      <span className="font-bold">content</span>=&quot;
-      ${metadata?.url}
-      &quot; <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;twitter:url&quot; <span className="font-bold">content</span>=&quot;${metadata?.url}&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>
-      =&quot;twitter:title&quot;
-      <span className="font-bold">content</span>=&quot;
-      ${metadata?.title}
-      &quot; <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;twitter:title&quot; <span className="font-bold">content</span>=&quot;${metadata?.title}&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>
-      =&quot;twitter:description&quot;
-      <span className="font-bold">content</span>=&quot;
-      ${metadata?.description}
-      &quot; <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;twitter:description&quot; <span className="font-bold">content</span>=&quot;${metadata?.description}&quot; <span className="font-bold">/&rsaquo;</span>
     </code>
   </pre>
   <pre>
     <code className="text-waikawa-gray-800">
-      <span className="font-bold">&lsaquo;meta</span>
-      <span className="font-bold">property</span>
-      =&quot;twitter:image&quot;
-      <span className="font-bold">content</span>
-      =&quot;your-link-image&quot;
-      <span className="font-bold">/&rsaquo;</span>
+      <span className="font-bold">&lsaquo;meta</span> <span className="font-bold">property</span>=&quot;twitter:image&quot; <span className="font-bold">content</span>=&quot;your-link-image&quot; <span className="font-bold"> /&rsaquo;</span>
     </code>
   </pre>
 </pre>`;
@@ -195,11 +136,11 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
+                <span className="font-bold">&lsaquo;meta</span>{" "}
                 <span className="font-bold">property</span>
-                =&quot;description&quot;
+                =&quot;description&quot;{" "}
                 <span className="font-bold">content</span>=&quot;
-                {metadata?.description}&quot;
+                {metadata?.description}&quot;{" "}
                 <span className="font-bold">/&rsaquo;</span>
               </code>
             </pre>
@@ -211,16 +152,16 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
-                <span className="font-bold">property</span>=&quot;og:type&quot;
+                <span className="font-bold">&lsaquo;meta</span>{" "}
+                <span className="font-bold">property</span>=&quot;og:type&quot;{" "}
                 <span className="font-bold">content</span>=&quot;website&quot;
                 <span className="font-bold">/&rsaquo;</span>
               </code>
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
-                <span className="font-bold">property</span>=&quot;og:url&quot;
+                <span className="font-bold">&lsaquo;meta</span>{" "}
+                <span className="font-bold">property</span>=&quot;og:url&quot;{" "}
                 <span className="font-bold">content</span>=&quot;
                 {metadata?.url}
                 &quot; <span className="font-bold">/&rsaquo;</span>
@@ -228,8 +169,8 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
-                <span className="font-bold">property</span>=&quot;og:title&quot;
+                <span className="font-bold">&lsaquo;meta</span>{" "}
+                <span className="font-bold">property</span>=&quot;og:title&quot;{" "}
                 <span className="font-bold">content</span>=&quot;
                 {metadata?.title}
                 &quot; <span className="font-bold">/&rsaquo;</span>
@@ -237,9 +178,9 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
+                <span className="font-bold">&lsaquo;meta</span>{" "}
                 <span className="font-bold">property</span>
-                =&quot;og:site_name&quot;
+                =&quot;og:site_name&quot;{" "}
                 <span className="font-bold">content</span>=&quot;
                 {metadata?.title}
                 &quot; <span className="font-bold">/&rsaquo;</span>
@@ -247,9 +188,9 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
+                <span className="font-bold">&lsaquo;meta</span>{" "}
                 <span className="font-bold">property</span>
-                =&quot;og:description&quot;
+                =&quot;og:description&quot;{" "}
                 <span className="font-bold">content</span>=&quot;
                 {metadata?.description}
                 &quot; <span className="font-bold">/&rsaquo;</span>
@@ -257,8 +198,8 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
-                <span className="font-bold">property</span>=&quot;og:image&quot;
+                <span className="font-bold">&lsaquo;meta</span>{" "}
+                <span className="font-bold">property</span>=&quot;og:image&quot;{" "}
                 <span className="font-bold">content</span>
                 =&quot;your-link-image&quot;
                 <span className="font-bold">/&rsaquo;</span>
@@ -272,9 +213,9 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
+                <span className="font-bold">&lsaquo;meta</span>{" "}
                 <span className="font-bold">property</span>
-                =&quot;twitter:card&quot;
+                =&quot;twitter:card&quot;{" "}
                 <span className="font-bold">content</span>
                 =&quot;summary_large_image&quot;
                 <span className="font-bold">/&rsaquo;</span>;
@@ -282,9 +223,9 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
+                <span className="font-bold">&lsaquo;meta</span>{" "}
                 <span className="font-bold">property</span>
-                =&quot;twitter:url&quot;
+                =&quot;twitter:url&quot;{" "}
                 <span className="font-bold">content</span>=&quot;
                 {metadata?.url}
                 &quot; <span className="font-bold">/&rsaquo;</span>
@@ -292,9 +233,9 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
+                <span className="font-bold">&lsaquo;meta</span>{" "}
                 <span className="font-bold">property</span>
-                =&quot;twitter:title&quot;
+                =&quot;twitter:title&quot;{" "}
                 <span className="font-bold">content</span>=&quot;
                 {metadata?.title}
                 &quot; <span className="font-bold">/&rsaquo;</span>
@@ -302,9 +243,9 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
+                <span className="font-bold">&lsaquo;meta</span>{" "}
                 <span className="font-bold">property</span>
-                =&quot;twitter:description&quot;
+                =&quot;twitter:description&quot;{" "}
                 <span className="font-bold">content</span>=&quot;
                 {metadata?.description}
                 &quot; <span className="font-bold">/&rsaquo;</span>
@@ -312,11 +253,11 @@ const Modal = () => {
             </pre>
             <pre>
               <code className="text-waikawa-gray-800">
-                <span className="font-bold">&lsaquo;meta</span>
+                <span className="font-bold">&lsaquo;meta</span>{" "}
                 <span className="font-bold">property</span>
-                =&quot;twitter:image&quot;
+                =&quot;twitter:image&quot;{" "}
                 <span className="font-bold">content</span>
-                =&quot;your-link-image&quot;
+                =&quot;your-link-image&quot;{" "}
                 <span className="font-bold">/&rsaquo;</span>
               </code>
             </pre>

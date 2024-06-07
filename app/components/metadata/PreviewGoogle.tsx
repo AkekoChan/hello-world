@@ -12,9 +12,15 @@ const PreviewGoogle = () => {
           <div className="flex items-center gap-3">
             <span
               className="block bg-[#f1f3f4] border-[#dadce0] border-1 w-6 h-6 rounded-full bg-center bg-cover"
-              style={{
-                backgroundImage: `url('${metadata?.icon}')`,
-              }}
+              style={
+                metadata
+                  ? {
+                      backgroundImage: `url('${metadata.icon}')`,
+                    }
+                  : {
+                      backgroundImage: `none`,
+                    }
+              }
             ></span>
             <div>
               <p className="text-[#202124] font-arial text-sm">

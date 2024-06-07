@@ -4,6 +4,7 @@ import { useMetadataContext } from "@/app/context/metadata/metadataContext";
 import { baseUrl } from "@/app/robots";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export interface IMetadata {
   title: string;
@@ -13,6 +14,8 @@ export interface IMetadata {
   site_name: string;
   url: string;
 }
+
+const protocol = /^(https?:\/\/)/;
 
 const CopyPasteInput = () => {
   const searchParams = useSearchParams();
@@ -24,7 +27,6 @@ const CopyPasteInput = () => {
     const formData = new FormData();
     formData.append("url", url);
     const response = await fetch(`/api/generate-metadata`, {
-      // next: { revalidate: 604800 },
       method: "POST",
       body: formData,
     });
@@ -40,21 +42,44 @@ const CopyPasteInput = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const url = new URL(baseUrl);
-    url.searchParams.set("url", urlSite as string);
-    history.pushState(null, "", url);
-
     try {
+      if (!urlSite) {
+        toast.error("Please, enter an URL !");
+        return;
+      }
+
+      if (!urlSite.match(/^(https?:\/\/)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/)?$/)) {
+        toast.error("Please, enter a valid URL !");
+        return;
+      }
+
+      if (!urlSite.match(protocol)) {
+        const parsedUrl = `https://${urlSite}`;
+        setUrlSite(parsedUrl);
+      }
+
+      const url = new URL(baseUrl);
+      url.searchParams.set("url", urlSite as string);
+      history.pushState(null, "", url);
+
       const formData = new FormData(event.currentTarget);
       const response = await fetch("/api/generate-metadata", {
         method: "POST",
         body: formData,
       });
 
+      if (!response.ok) {
+        url.searchParams.delete("url");
+        history.pushState(null, "", url);
+        setUrlSite(baseUrl);
+        throw new Error("Please, enter a valid URL.");
+      }
+
       const data: IMetadata = await response.json();
       handleAddMetadata(data);
     } catch (error: any) {
       console.error(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -66,7 +91,7 @@ const CopyPasteInput = () => {
     <form className="flex items-end gap-4 flex-wrap" onSubmit={handleSubmit}>
       <label className="form-control" htmlFor="cp-input">
         <div className="label">
-          <span className="label-text">Enter the URL site :</span>
+          <span className="label-text">Enter the URL site</span>
         </div>
         <input
           className="input input-bordered input-primary shadow-lg"

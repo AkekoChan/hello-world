@@ -9,12 +9,16 @@
 @media (prefers-color-scheme: dark) {
 }
 
-body {
-}
-
 ::selection {
   background: #4a5989;
   color: #f2f7fb;
+}
+
+input[type="color"] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
 }
 
 @layer utilities {

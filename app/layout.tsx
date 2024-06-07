@@ -1,10 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/header/Header";
 import "./globals.css";
 import { baseUrl } from "./robots";
 import { ubuntu } from "./utils/fonts/fonts";
+
+export const viewport: Viewport = {
+  themeColor: "#4a5989",
+};
 
 export const metadata: Metadata = {
   title: "Hello World - The developer's Swiss Army knife",

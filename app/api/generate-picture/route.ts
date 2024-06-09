@@ -4,6 +4,7 @@ import JSZip from "jszip";
 import fs from "node:fs/promises";
 import path from "path";
 
+// https://www.pronextjs.dev/next-js-file-uploads-server-side-solutions
 export const POST = async (req: Request) => {
   try {
     console.log("Starting POST request handler");
@@ -14,7 +15,7 @@ export const POST = async (req: Request) => {
     const outputFormat = formData.get("format") as string;
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
+    const uploadDir = path.join(process.cwd(), "uploads");
     const filePath = path.join(uploadDir, file.name);
 
     imagesToDelete.push(filePath);

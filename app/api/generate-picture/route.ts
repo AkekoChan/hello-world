@@ -14,12 +14,11 @@ export const POST = async (req: Request) => {
     const outputFormat = formData.get("format") as string;
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
+    const uploadDir = path.join(process.cwd(), "uploads");
     const filePath = path.join(uploadDir, file.name);
 
     imagesToDelete.push(filePath);
 
-    await fs.mkdir(uploadDir, { recursive: true });
     await fs.writeFile(filePath, buffer);
 
     const formats = ["webp", "jpeg"];

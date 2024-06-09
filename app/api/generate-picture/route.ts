@@ -1,5 +1,4 @@
 import fs from "node:fs/promises";
-import path from "path";
 
 // https://www.pronextjs.dev/next-js-file-uploads-server-side-solutions
 export const POST = async (req: Request) => {
@@ -10,10 +9,10 @@ export const POST = async (req: Request) => {
     const outputFormat = formData.get("format") as string;
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    const filePath = path.join(uploadDir, file.name);
+    // const uploadDir = path.join(process.cwd(), "public", "uploads");
+    // const filePath = path.join(uploadDir, file.name);
 
-    imagesToDelete.push(filePath);
+    // imagesToDelete.push(filePath);
 
     // await fs.mkdir(uploadDir, { recursive: true });
     await fs.writeFile(`./public/uploads/${file.name}`, buffer);

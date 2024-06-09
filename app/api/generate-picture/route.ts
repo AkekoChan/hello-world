@@ -21,6 +21,7 @@ export const POST = async (req: Request) => {
       await fs.stat(uploadDir);
     } catch (e: any) {
       if (e.code === "ENOENT") {
+        console.log(e.code);
         await fs.mkdir(uploadDir, { recursive: true });
       } else {
         console.error(

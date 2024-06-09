@@ -1,4 +1,4 @@
-export const baseUrl = "https://hello-world-dev.vercel.app/";
+export const baseUrl = "http://localhost:3000";
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {

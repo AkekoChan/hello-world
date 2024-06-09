@@ -14,8 +14,25 @@ export const POST = async (req: Request) => {
     const outputFormat = formData.get("format") as string;
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
-    const uploadDir = "/uploads/";
+    const uploadDir = path.join(process.cwd(), "uploads");
     const filePath = path.join(uploadDir, file.name);
+
+    try {
+      await fs.stat(uploadDir);
+    } catch (e: any) {
+      if (e.code === "ENOENT") {
+        await fs.mkdir(uploadDir, { recursive: true });
+      } else {
+        console.error(
+          "Error while trying to create directory when uploading a file\n",
+          e
+        );
+        return new Response(JSON.stringify({ message: e.message }), {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+    }
 
     imagesToDelete.push(filePath);
 

@@ -71,7 +71,7 @@ const FormPicture = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to generate picture");
+        throw new Error("Failed to generate picture.");
       }
 
       const blob = await response.blob();

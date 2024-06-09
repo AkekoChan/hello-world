@@ -4,11 +4,10 @@ import JSZip from "jszip";
 import fs from "node:fs/promises";
 import path from "path";
 
-// Donner la possibilité de chosoir le format de base
-
-// https://www.pronextjs.dev/next-js-file-uploads-server-side-solutions
 export const POST = async (req: Request) => {
   try {
+    console.log("Starting POST request handler");
+
     let imagesToDelete = [];
     const formData = await req.formData();
     const file = formData.get("file") as File;
@@ -20,8 +19,20 @@ export const POST = async (req: Request) => {
 
     imagesToDelete.push(filePath);
 
-    await fs.mkdir(uploadDir, { recursive: true });
+    // Log directory paths
+    console.log("Upload directory:", uploadDir);
+    console.log("File path:", filePath);
+
+    try {
+      await fs.mkdir(uploadDir, { recursive: true });
+      console.log("Directory created successfully");
+    } catch (err) {
+      console.error("Error creating directory:", err);
+      throw err;
+    }
+
     await fs.writeFile(filePath, buffer);
+    console.log("File written successfully");
 
     const formats = ["webp", "jpeg"];
 
@@ -29,16 +40,14 @@ export const POST = async (req: Request) => {
       widths: [400, 800],
       formats: [
         "webp",
-        `${
-          outputFormat == "img/png"
-            ? "png"
-            : outputFormat == "img/jpeg"
-            ? "jpeg"
-            : "jpeg"
-        }`,
+        outputFormat === "img/png"
+          ? "png"
+          : outputFormat === "img/jpeg"
+          ? "jpeg"
+          : "jpeg",
       ],
       outputDir: uploadDir,
-      urlPath: uploadDir,
+      urlPath: "/uploads", // Use a relative URL path
     });
 
     const getLargestImage = (format: ImageFormat) => {
@@ -51,26 +60,20 @@ export const POST = async (req: Request) => {
     const sourceHtmlString = Object.values(imageMetadata)
       .map((images) => {
         const { sourceType } = images[0];
-
         const sourceAttributes = stringifyAttributes({
           type: sourceType,
           srcset: images
-            .map(
-              (image) => `/your-path-folder/${getFileNameFromUrl(image.srcset)}`
-            )
+            .map((image) => `/uploads/${getFileNameFromUrl(image.srcset)}`)
             .join(", "),
           sizes: "100vw",
         });
-
         return `<source ${sourceAttributes}>`;
       })
       .join("\n");
 
     const largestUnoptimizedImg = getLargestImage(formats[0] as ImageFormat);
     const imgAttributes = stringifyAttributes({
-      src: `/your-path-folder/${getFileNameFromUrl(
-        largestUnoptimizedImg?.url
-      )}`,
+      src: `/uploads/${getFileNameFromUrl(largestUnoptimizedImg?.url)}`,
       width: largestUnoptimizedImg?.width,
       height: largestUnoptimizedImg?.height,
       loading: "lazy",
@@ -114,7 +117,7 @@ export const POST = async (req: Request) => {
       },
     });
   } catch (e: any) {
-    console.error(e);
+    console.error("Error during POST request:", e);
     return new Response(JSON.stringify({ message: e.message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

@@ -1,11 +1,11 @@
-// https://www.pronextjs.dev/next-js-file-uploads-server-side-solutions
-
 import { getFileNameFromUrl, stringifyAttributes } from "@/app/utils";
 import Image, { ImageFormat } from "@11ty/eleventy-img";
 import JSZip from "jszip";
 import fs from "node:fs/promises";
 import path from "path";
 
+// https://codersteps.com/articles/building-a-file-uploader-from-scratch-with-next-js-app-directory
+// https://www.pronextjs.dev/next-js-file-uploads-server-side-solutions
 export const POST = async (req: Request) => {
   try {
     let imagesToDelete = [];
@@ -14,29 +14,12 @@ export const POST = async (req: Request) => {
     const outputFormat = formData.get("format") as string;
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
-    const uploadDir = path.join("uploads");
+    const uploadDir = path.join(process.cwd(), "public", "uploads");
     const filePath = path.join(uploadDir, file.name);
-
-    try {
-      await fs.stat(uploadDir);
-    } catch (e: any) {
-      if (e.code === "ENOENT") {
-        console.log(e.code);
-        await fs.mkdir(uploadDir, { recursive: true });
-      } else {
-        console.error(
-          "Error while trying to create directory when uploading a file\n",
-          e
-        );
-        return new Response(JSON.stringify({ message: e.message }), {
-          status: 500,
-          headers: { "Content-Type": "application/json" },
-        });
-      }
-    }
 
     imagesToDelete.push(filePath);
 
+    await fs.mkdir(uploadDir, { recursive: true });
     await fs.writeFile(filePath, buffer);
 
     const formats = ["webp", "jpeg"];
@@ -45,14 +28,16 @@ export const POST = async (req: Request) => {
       widths: [400, 800],
       formats: [
         "webp",
-        outputFormat === "img/png"
-          ? "png"
-          : outputFormat === "img/jpeg"
-          ? "jpeg"
-          : "jpeg",
+        `${
+          outputFormat == "img/png"
+            ? "png"
+            : outputFormat == "img/jpeg"
+            ? "jpeg"
+            : "jpeg"
+        }`,
       ],
       outputDir: uploadDir,
-      urlPath: "/uploads", // Chemin relatif pour accéder aux fichiers
+      urlPath: uploadDir,
     });
 
     const getLargestImage = (format: ImageFormat) => {
@@ -65,20 +50,26 @@ export const POST = async (req: Request) => {
     const sourceHtmlString = Object.values(imageMetadata)
       .map((images) => {
         const { sourceType } = images[0];
+
         const sourceAttributes = stringifyAttributes({
           type: sourceType,
           srcset: images
-            .map((image) => `/uploads/${getFileNameFromUrl(image.srcset)}`)
+            .map(
+              (image) => `/your-path-folder/${getFileNameFromUrl(image.srcset)}`
+            )
             .join(", "),
           sizes: "100vw",
         });
+
         return `<source ${sourceAttributes}>`;
       })
       .join("\n");
 
     const largestUnoptimizedImg = getLargestImage(formats[0] as ImageFormat);
     const imgAttributes = stringifyAttributes({
-      src: `/uploads/${getFileNameFromUrl(largestUnoptimizedImg?.url)}`,
+      src: `/your-path-folder/${getFileNameFromUrl(
+        largestUnoptimizedImg?.url
+      )}`,
       width: largestUnoptimizedImg?.width,
       height: largestUnoptimizedImg?.height,
       loading: "lazy",
@@ -118,11 +109,11 @@ export const POST = async (req: Request) => {
       status: 200,
       headers: {
         "Content-Type": "application/zip",
-        "Content-Disposition": `attachment; filename="snapcial-ai.zip"`,
+        "Content-Disposition": `attachment; filename="picture.zip"`,
       },
     });
   } catch (e: any) {
-    console.error("Error during POST request:", e);
+    console.error(e);
     return new Response(JSON.stringify({ message: e.message }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

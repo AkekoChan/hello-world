@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    nftTracing: true,
+    outputFileTracingIncludes: {
+      "/api/generate-picture": ["./public/uploads/**/*"],
+    },
   },
 };
 

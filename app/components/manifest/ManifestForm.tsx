@@ -1,7 +1,27 @@
+"use client";
+
+import { useManifestContext } from "@/app/context/manifest/manifestContext";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { LuDownload } from "react-icons/lu";
 import InputColor from "./InputColor";
 
+export interface IManifest {
+  themeColor: string;
+  bgColor: string;
+  display: string;
+  scope: string;
+  startURL: string;
+  shortName: string;
+  name: string;
+  description: string;
+}
+
 const ManifestForm = () => {
+  const { data, handleAddData } = useManifestContext();
+  const [themeColor, setThemeColor] = useState("");
+  const [bgColor, setBgColor] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+
   const display = {
     Browser: "browser",
     Standalone: "standalone",
@@ -19,8 +39,78 @@ const ManifestForm = () => {
     });
   };
 
+  const handleChangeIcon = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      setFile(file);
+    }
+  };
+
+  const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
+    const newData = {
+      ...(data as IManifest),
+      name: event.target.value,
+    };
+    handleAddData(newData);
+  };
+
+  const handleChangeShortName = (event: ChangeEvent<HTMLInputElement>) => {
+    const newData = {
+      ...(data as IManifest),
+      shortName: event.target.value,
+    };
+    handleAddData(newData);
+  };
+
+  const handleChangeScope = (event: ChangeEvent<HTMLInputElement>) => {
+    const newData = {
+      ...(data as IManifest),
+      scope: event.target.value,
+    };
+    handleAddData(newData);
+  };
+
+  const handleChangeStartURL = (event: ChangeEvent<HTMLInputElement>) => {
+    const newData = {
+      ...(data as IManifest),
+      startURL: event.target.value,
+    };
+    handleAddData(newData);
+  };
+
+  const handleChangeDescription = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const newData = {
+      ...(data as IManifest),
+      description: event.target.value,
+    };
+    handleAddData(newData);
+  };
+
+  const handleChangeDisplay = (event: ChangeEvent<HTMLSelectElement>) => {
+    const newData = {
+      ...(data as IManifest),
+      display: event.target.value,
+    };
+    handleAddData(newData);
+  };
+
+  const handleSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    formData.append("themeColor", themeColor);
+    formData.append("bgColor", bgColor);
+    formData.append("file", file as Blob);
+
+    const response = await fetch("/api/generate-manifest", {
+      method: "POST",
+      body: formData,
+    });
+  };
+
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4" onSubmit={handleSubmitForm}>
       <label htmlFor="manifest-name" className="form-control">
         <div className="label pt-0">
           <span className="label-text">Name of your app</span>
@@ -29,6 +119,8 @@ const ManifestForm = () => {
           name="name"
           id="manifest-name"
           className="input input-primary w-full shadow-lg"
+          onChange={handleChangeName}
+          value={data?.name}
         />
       </label>
 
@@ -40,6 +132,8 @@ const ManifestForm = () => {
           name="short-name"
           id="manifest-short-name"
           className="input input-primary w-full shadow-lg"
+          onChange={handleChangeShortName}
+          value={data?.shortName}
         />
       </label>
 
@@ -52,6 +146,8 @@ const ManifestForm = () => {
           className="select select-bordered select-primary w-full"
           name="display"
           defaultValue={"Browser"}
+          value={data?.display}
+          onChange={handleChangeDisplay}
         >
           <OptionElements />
         </select>
@@ -65,6 +161,8 @@ const ManifestForm = () => {
           name="description"
           id="manifest-description"
           className="textarea textarea-primary w-full resize-none shadow-lg"
+          onChange={handleChangeDescription}
+          value={data?.description}
         ></textarea>
       </label>
 
@@ -76,6 +174,8 @@ const ManifestForm = () => {
           name="scope"
           id="manifest-scope"
           className="input input-primary w-full shadow-lg"
+          onChange={handleChangeScope}
+          value={data?.scope || "/"}
         />
       </label>
 
@@ -87,12 +187,14 @@ const ManifestForm = () => {
           name="start-url"
           id="manifest-start-url"
           className="input input-primary w-full shadow-lg"
+          onChange={handleChangeStartURL}
+          value={data?.startURL || "/"}
         />
       </label>
 
-      <InputColor label={"Theme Color"} />
+      <InputColor label={"Theme Color"} setInputColor={setThemeColor} />
 
-      <InputColor label={"Background Color"} />
+      <InputColor label={"Background Color"} setInputColor={setBgColor} />
 
       <label className="form-control w-full">
         <div className="label pt-0">
@@ -101,6 +203,7 @@ const ManifestForm = () => {
         <input
           type="file"
           className="file-input file-input-bordered file-input-primary w-full"
+          onChange={handleChangeIcon}
         />
       </label>
 

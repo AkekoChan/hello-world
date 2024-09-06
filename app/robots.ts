@@ -1,4 +1,5 @@
-export const baseUrl = "https://hello-world.martintheo.fr";
+// export const baseUrl = "https://hello-world.martintheo.fr";
+export const baseUrl = "http://localhost:3000/";
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {

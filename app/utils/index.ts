@@ -1,3 +1,5 @@
+import path from "node:path";
+
 type AttributeMap = {
   [key: string]: string | number | undefined;
 };
@@ -17,3 +19,6 @@ export const stringifyAttributes = (attributeMap: AttributeMap) => {
     })
     .join(" ");
 };
+
+export const removeBaseDirectory = (str: string) =>
+  str.substring(str.indexOf(path.sep));

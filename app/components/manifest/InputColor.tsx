@@ -1,11 +1,18 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
-const InputColor = ({ label }: { label: string }) => {
+const InputColor = ({
+  label,
+  setInputColor,
+}: {
+  label: string;
+  setInputColor: Dispatch<SetStateAction<string>>;
+}) => {
   const [color, setColor] = useState("#49588a");
   const handleChangeColor = (e: ChangeEvent<HTMLInputElement>) => {
     setColor(e.target.value);
+    setInputColor(e.target.value);
   };
 
   return (

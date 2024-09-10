@@ -9,9 +9,13 @@ import path from "path";
 export const POST = async (req: Request) => {
   try {
     let imagesToDelete = [];
+
+    // Récupération des données de la requête
     const formData = await req.formData();
     const file = formData.get("file") as File;
     const outputFormat = formData.get("format") as string;
+
+    // Conversion et stockage du fichier
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
     const uploadDir = path.join(process.cwd(), "uploads");
@@ -24,6 +28,7 @@ export const POST = async (req: Request) => {
 
     const formats = ["webp", "jpeg"];
 
+    // Traitement des images
     const imageMetadata = await Image(filePath, {
       widths: [400, 800],
       formats: [
@@ -40,6 +45,7 @@ export const POST = async (req: Request) => {
       urlPath: uploadDir,
     });
 
+    // Création du HTML source pour l'image
     const getLargestImage = (format: ImageFormat) => {
       const images = imageMetadata[format];
       if (images) {
@@ -82,6 +88,7 @@ export const POST = async (req: Request) => {
       ${imgHtmlString}
     </picture>`;
 
+    // Création du fichier Zip
     const zip = new JSZip();
     zip.file("picture.html", picture);
     const imgDir = zip.folder("images");

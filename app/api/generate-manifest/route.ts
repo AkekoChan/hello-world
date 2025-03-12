@@ -60,7 +60,8 @@ export const POST = async (req: Request) => {
     const zip = new JSZip();
     zip.file("favicons.html", faviconHTML as string);
 
-    const manifest = `{
+    const manifest = `
+    {
       "theme_color": "${themeColor}",
       "background_color": "${bgColor}",
       "display": "${display}",
@@ -68,8 +69,20 @@ export const POST = async (req: Request) => {
       "start_url": "${startURL}",
       "short_name": "${shortName}",
       "name": "${name}",
-      "description": "${description}"
-      }`;
+      "description": "${description}",
+      "icons": [
+        {
+          "src": "your-image-folder/favicons/favicon-512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        },
+        {
+          "src": "your-image-folder/favicons/favicon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }`;
     zip.file("manifest.json", manifest);
     const faviconDir = zip.folder("favicons");
 

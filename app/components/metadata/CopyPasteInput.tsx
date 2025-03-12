@@ -3,7 +3,7 @@
 import { useMetadataContext } from "@/app/context/metadata/metadataContext";
 import { baseUrl } from "@/app/robots";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export interface IMetadata {
@@ -23,17 +23,20 @@ const CopyPasteInput = () => {
   const [urlSite, setUrlSite] = useState(searchParams.get("url") || baseUrl);
   const useUrl = searchParams.get("url") || baseUrl;
 
-  const getMetadata = async (url: string) => {
-    const formData = new FormData();
-    formData.append("url", url);
-    const response = await fetch(`/api/generate-metadata`, {
-      method: "POST",
-      body: formData,
-    });
+  const getMetadata = useCallback(
+    async (url: string) => {
+      const formData = new FormData();
+      formData.append("url", url);
+      const response = await fetch(`/api/generate-metadata`, {
+        method: "POST",
+        body: formData,
+      });
 
-    const data: IMetadata = await response.json();
-    handleAddMetadata(data);
-  };
+      const data: IMetadata = await response.json();
+      handleAddMetadata(data);
+    },
+    [handleAddMetadata]
+  );
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     setUrlSite(event.currentTarget.value);

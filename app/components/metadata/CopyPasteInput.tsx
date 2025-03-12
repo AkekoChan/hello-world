@@ -3,7 +3,7 @@
 import { useMetadataContext } from "@/app/context/metadata/metadataContext";
 import { baseUrl } from "@/app/robots";
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useCallback, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export interface IMetadata {
@@ -23,20 +23,17 @@ const CopyPasteInput = () => {
   const [urlSite, setUrlSite] = useState(searchParams.get("url") || baseUrl);
   const useUrl = searchParams.get("url") || baseUrl;
 
-  const getMetadata = useCallback(
-    async (url: string) => {
-      const formData = new FormData();
-      formData.append("url", url);
-      const response = await fetch(`/api/generate-metadata`, {
-        method: "POST",
-        body: formData,
-      });
+  const getMetadata = async (url: string) => {
+    const formData = new FormData();
+    formData.append("url", url);
+    const response = await fetch(`/api/generate-metadata`, {
+      method: "POST",
+      body: formData,
+    });
 
-      const data: IMetadata = await response.json();
-      handleAddMetadata(data);
-    },
-    [handleAddMetadata]
-  );
+    const data: IMetadata = await response.json();
+    handleAddMetadata(data);
+  };
 
   const handleChange = (event: FormEvent<HTMLInputElement>) => {
     setUrlSite(event.currentTarget.value);
@@ -88,7 +85,8 @@ const CopyPasteInput = () => {
 
   useEffect(() => {
     getMetadata(useUrl);
-  }, [getMetadata, useUrl]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [useUrl]);
 
   return (
     <form className="flex items-end gap-4 flex-wrap" onSubmit={handleSubmit}>

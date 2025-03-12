@@ -190,7 +190,8 @@ const ManifestForm = () => {
       handleAddData(newData);
       console.log(data);
     }
-  }, [bgColor, handleAddData, data, themeColor]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [themeColor, bgColor]);
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmitForm}>

@@ -190,7 +190,7 @@ const ManifestForm = () => {
       handleAddData(newData);
       console.log(data);
     }
-  }, [themeColor, bgColor]);
+  }, [bgColor, handleAddData, data, themeColor]);
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmitForm}>

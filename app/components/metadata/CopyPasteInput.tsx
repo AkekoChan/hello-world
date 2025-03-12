@@ -85,7 +85,7 @@ const CopyPasteInput = () => {
 
   useEffect(() => {
     getMetadata(useUrl);
-  }, [useUrl]);
+  }, [getMetadata, useUrl]);
 
   return (
     <form className="flex items-end gap-4 flex-wrap" onSubmit={handleSubmit}>
